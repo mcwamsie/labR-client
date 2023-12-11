@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    ::-webkit-scrollbar {
+        @apply w-2 h-2 cursor-pointer
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        @apply rounded-none cursor-pointer;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        @apply rounded-none bg-primary
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        @apply h-2 bg-slate-500
+    }
+
+    html, body, #app, #wrapper {
+        @apply w-full h-full
+    }
+
+    body {
+        @apply bg-paper text-[14px] font-main
+    }
+
+    #app-bar {
+        @apply fixed top-0 right-0 p-0 shadow bg-white z-[70] left-0 h-[48px] flex bg-slate-800
+    }
+
+    #app-logo {
+        @apply w-[48px] h-[48px] flex items-center justify-center text-primary bg-slate-800 py-2
+    }
+
+    #app-sidebar {
+        @apply h-[100vh] w-[48px] top-0 left-0 bg-white fixed  z-[60] flex-col  flex transition-all
+    }
+
+    #app-sidebar-left {
+        @apply flex flex-col pt-4 pb-4 w-[48px] shadow bg-white lg:z-[60]
+    }
+
+    #app-sidebar-right {
+        @apply flex-grow py-3 px-0 max-h-full overflow-hidden flex w-0 transition-all flex-col fixed
+        lg:relative bg-white  z-[-1] lg:z-[50] top-[48px] left-[-10000px] shadow-lg lg:shadow-none  bottom-0 lg:top-0 lg:left-0
+    }
+
+    #wrapper {
+        @apply pl-[48px] pt-[48px] flex transition-all
+    }
+
+    #wrapper.open {
+        @apply lg:pl-[280px]
+    }
+
+    #wrapper.open #app-sidebar {
+        @apply lg:w-[280px]
+    }
+
+    #wrapper.open #app-sidebar-right {
+        @apply w-[240px] lg:w-[192px] px-3 left-[48px] lg:left-0
+    }
+
+    .sidebar-link {
+        @apply flex items-center justify-center h-[48px] text-slate-600
+    }
+
+    .sidebar-link:first-child {
+        @apply mb-4
+    }
+
+    .sidebar-link:nth-child(2) {
+        @apply mt-auto
+    }
+
+    #app-content {
+        @apply flex-grow flex flex-col max-h-full overflow-hidden
+    }
+
+    .data-table {
+        @apply block w-full flex-grow overflow-x-auto border-[1px] border-slate-50 relative
+    }
+
+    .data-table table {
+        @apply whitespace-nowrap p-[4.8px] text-[#212529] w-full
+    }
+
+    .data-table th, .data-table td {
+        @apply whitespace-nowrap text-[12px] border-[1px] border-solid border-[#dee2e6] p-1 min-h-[36px]
+    }
+
+    .data-table.form td {
+        @apply py-0 px-2
+    }
+
+    .data-table.form td.error {
+        @apply border-red-700
+    }
+
+    .data-table.striped tbody tr:nth-of-type(odd) {
+        @apply bg-[rgba(0,0,0,.05)]
+    }
+
+    .data-table thead th {
+        @apply sticky top-[0px] bg-white text-black font-bold z-50
+    }
+
+    .data-table td input, .data-table td select {
+        @apply h-[32px] px-3 border-none focus:outline-none focus:border-none w-full font-bold bg-transparent  rounded-none
+    }
+
+    .data-table td input[type=number] {
+        @apply text-right
+    }
+
+
+    /*------ modal------- */
+    .modal {
+        @apply fixed top-0 right-[-1000px]  z-[101] hidden w-full sm:max-w-[400px] bg-white h-full overflow-hidden transition-all
+    }
+
+    .modal.full-screen {
+        @apply top-0 bottom-0 sm:top-[24px] sm:bottom-[24px] h-full sm:h-auto w-full md:max-w-[600px] lg:max-w-[800px] xl:max-w-[1024px]
+    }
+
+
+    .modal.open {
+        @apply flex flex-col right-0
+    }
+
+    .modal.full-screen.full-screen {
+        @apply right-[50%];
+        transform: translateX(+50%);
+    }
+
+    .modal-backdrop {
+        @apply fixed top-0 left-0 z-[100] w-[100vw] h-[100vh] opacity-0 pointer-events-none bg-black transition-all
+    }
+
+    .modal-backdrop.show {
+        @apply opacity-50 pointer-events-auto
+    }
+
+    /*------- Form input -----*/
+    .form-field {
+        @apply relative
+    }
+
+
+    .form-input {
+        @apply border-0 pl-[14px] text-[14px] h-[48px] block w-full pt-2 pb-0 pr-3 text-slate-950
+        outline-0 focus:outline-0
+    }
+
+    .form-input.password {
+        @apply pr-[48px]
+    }
+
+    textarea.form-input, select[multiple] {
+        @apply h-auto
+    }
+
+    select[multiple] {
+        @apply h-[120px]
+    }
+
+    select[multiple] option {
+        @apply p-2
+    }
+
+    .form-field fieldset {
+        @apply absolute left-0 top-[-8px] bottom-0 h-auto right-0 pointer-events-none border-solid border-[1px]
+        border-gray-400 text-gray-400 pl-3
+    }
+
+    /*
+     select[multiple].form-input ~ fieldset{
+         @apply h-[128px]
+     }
+
+     */
+    .form-field fieldset legend {
+        @apply text-[13px] mb-0 relative top-0 w-auto px-2
+    }
+
+
+    .form-input:focus ~ fieldset, .multiselect--active ~ fieldset {
+        @apply border-primary border-[2px] text-primary
+    }
+
+    .form-field.has-error fieldset {
+        @apply text-red-700 border-red-700
+    }
+
+
+    .form-input.multiselect {
+        @apply p-0 text-[14px] ;
+        border: none !important
+    }
+
+    .multiselect__input, .multiselect__single {
+        @apply rounded-none border-none
+    }
+
+    .multiselect__placeholder {
+        @apply mb-0
+    }
+
+    .form-input.multiselect ~ fieldset {
+        @apply z-[80]
+    }
+
+    .search-box {
+        @apply relative m-0 block h-[40px] min-w-0 flex-auto
+        rounded-none border-[1px] border-solid border-[#dee2e6] bg-transparent
+        bg-clip-padding px-4 py-[0.25rem] flex-grow
+        placeholder:text-slate-900
+        text-[14px] font-normal leading-[1.6] text-neutral-700 outline-none transition
+        duration-200 ease-in-out focus:z-[3] focus:border-primary
+        focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)]
+        focus:outline-none
+    }
+
+    .search-box-btn {
+        @apply relative z-[2] items-center justify-center bg-slate-500 rounded-none
+        w-[40px] h-[40px] flex
+        text-xs font-medium uppercase
+        text-white transition duration-150 ease-in-out
+        hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700
+        focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg
+    }
+
+    .search-box:focus + .search-box-btn {
+        @apply bg-primary
+    }
+
+    .multiselect__tag {
+        @apply bg-slate-700
+    }
+
+    .multiselect__content-wrapper {
+        @apply shadow
+    }
+}
